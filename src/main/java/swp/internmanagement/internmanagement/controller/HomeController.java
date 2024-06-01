@@ -9,7 +9,10 @@ import swp.internmanagement.internmanagement.entity.Job;
 import swp.internmanagement.internmanagement.entity.Request;
 import swp.internmanagement.internmanagement.entity.UserAccount;
 import swp.internmanagement.internmanagement.payload.request.HelpRequest;
+import swp.internmanagement.internmanagement.payload.response.GetAllFieldsResponse;
 import swp.internmanagement.internmanagement.payload.response.GetAllJobsResponse;
+import swp.internmanagement.internmanagement.repository.FieldRepository;
+import swp.internmanagement.internmanagement.service.FieldService;
 import swp.internmanagement.internmanagement.service.JobService;
 import swp.internmanagement.internmanagement.service.RequestService;
 import swp.internmanagement.internmanagement.service.UserAccountService;
@@ -29,6 +32,9 @@ public class HomeController {
     @Autowired
     private UserAccountService userAccountService;
 
+    @Autowired
+    private FieldService fieldService;
+
     @GetMapping("/jobs")
     public ResponseEntity<GetAllJobsResponse> getAllJobs(
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
@@ -40,6 +46,14 @@ public class HomeController {
     @GetMapping("/jobs/{jobName}")
     public ResponseEntity<List<Job>> getJob(@PathVariable String jobName) {
         return ResponseEntity.ok(jobService.getJobs(jobName));
+    }
+
+    @GetMapping("/fields")
+    public ResponseEntity<GetAllFieldsResponse> getAllFields(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "0", required = false) int pageSize
+    ){
+        return ResponseEntity.ok(fieldService.getAllFields(pageNo, pageSize));
     }
 
     @PostMapping("/sendRequest")
