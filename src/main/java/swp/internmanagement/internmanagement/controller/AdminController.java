@@ -29,9 +29,9 @@ public class AdminController {
         return ResponseEntity.ok(requestService.getRequests());
     }
 
-    @GetMapping("/search={companyName}")
-    public ResponseEntity<List<UserAccount>> getAllUserAccountsByParam(@PathVariable String companyName) {
-        return ResponseEntity.ok(userAccountService.getAllUserAccountsByParam(companyName));
+    @GetMapping("/search={searchParam}")
+    public ResponseEntity<List<UserAccount>> getAllUserAccountsByParam(@PathVariable String searchParam) {
+        return ResponseEntity.ok(userAccountService.getAllUserAccountsByParam(searchParam));
     }
 
 }
