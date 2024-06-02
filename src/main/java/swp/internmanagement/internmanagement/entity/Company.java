@@ -1,5 +1,6 @@
 package swp.internmanagement.internmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -41,10 +42,11 @@ public class Company {
     private String location;
 
     @OneToMany(mappedBy = "company")
+    @JsonIgnore
     private List<Job> jobs = new ArrayList<>();
 
     @OneToMany(mappedBy = "company")
-    @JsonManagedReference
+    @JsonIgnore
     private List<UserAccount> userAccounts = new ArrayList<>();
 
 }
